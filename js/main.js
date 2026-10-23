@@ -199,7 +199,6 @@
   const slider = document.querySelector("[data-slider]");
 
   if (slider) {
-    const track = slider.querySelector(".slider__track");
     const slides = slider.querySelectorAll(".slider__slide");
     const dots = slider.querySelectorAll(".slider__dot");
     const status = slider.querySelector(".slider__status");
@@ -209,28 +208,16 @@
     let timer = null;
     let isPaused = prefersReducedMotion;
 
-    const loopClone = slides[0].cloneNode(true);
-    loopClone.setAttribute("aria-hidden", "true");
-    loopClone.querySelector("img").alt = "";
-    track.appendChild(loopClone);
-
-    const moveTrack = (position, animate) => {
-      track.style.transition = animate ? "" : "none";
-      track.style.transform = `translateX(-${position * 100}%)`;
-    };
-
     const goTo = (index) => {
-      const wrapsForward = index === slides.length;
       current = (index + slides.length) % slides.length;
-      moveTrack(wrapsForward ? slides.length : current, !prefersReducedMotion);
-      slides.forEach((slide, i) => slide.setAttribute("aria-hidden", String(i !== current)));
+      slides.forEach((slide, i) => {
+        const isActive = i === current;
+        slide.classList.toggle("is-active", isActive);
+        slide.setAttribute("aria-hidden", String(!isActive));
+      });
       dots.forEach((dot, i) => dot.setAttribute("aria-current", String(i === current)));
       status.textContent = `Photo ${current + 1} of ${slides.length}`;
     };
-
-    track.addEventListener("transitionend", () => {
-      if (current === 0) moveTrack(0, false);
-    });
 
     const stop = () => {
       clearInterval(timer);
@@ -239,7 +226,7 @@
 
     const start = () => {
       if (isPaused || timer) return;
-      timer = setInterval(() => goTo(current + 1), 4000);
+      timer = setInterval(() => goTo(current + 1), 6000);
     };
 
     const updatePauseButton = () => {
