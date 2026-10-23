@@ -564,8 +564,12 @@ textarea:focus-visible {
 }
 
 .hero--home {
-  background-image: url("../images/onelifega/hero-brand-banner.png");
-  background-position: top center;
+  background-image: url("../images/onelifega/hero-cross-globe.jpg");
+  background-image: image-set(
+    url("../images/onelifega/hero-cross-globe.webp") type("image/webp"),
+    url("../images/onelifega/hero-cross-globe.jpg") type("image/jpeg")
+  );
+  background-position: center;
 }
 
 .page-header--about {
