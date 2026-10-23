@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photo Carousel | One Life Church</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f2f5f2;
+    color: #16233a;
+  }
+
+  .carousel-page {
+    max-width: 1180px;
+    margin-inline: auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  .carousel-page h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+  }
+
+  .swiper {
+    padding: 0.5rem 0 3rem;
+  }
+
+  .swiper-slide {
+    height: auto;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(28, 32, 51, 0.12);
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: #16305c;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: #6fae3e;
+  }
+</style>
+</head>
+<body>
+
+<div class="carousel-page">
+  <h1>Photo Carousel</h1>
+
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="images/slide1.jpg" alt="One Life Church photo 1" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide2.jpg" alt="One Life Church photo 2" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide3.jpg" alt="One Life Church photo 3" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide4.jpg" alt="One Life Church photo 4" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide5.jpg" alt="One Life Church photo 5" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide6.jpg" alt="One Life Church photo 6" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide7.jpg" alt="One Life Church photo 7" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide8.jpg" alt="One Life Church photo 8" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide9.jpg" alt="One Life Church photo 9" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide10.jpg" alt="One Life Church photo 10" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide11.jpg" alt="One Life Church photo 11" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide12.jpg" alt="One Life Church photo 12" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide13.jpg" alt="One Life Church photo 13" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide14.jpg" alt="One Life Church photo 14" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide15.jpg" alt="One Life Church photo 15" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide16.jpg" alt="One Life Church photo 16" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide17.jpg" alt="One Life Church photo 17" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide18.jpg" alt="One Life Church photo 18" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide19.jpg" alt="One Life Church photo 19" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide20.jpg" alt="One Life Church photo 20" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide21.jpg" alt="One Life Church photo 21" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide22.jpg" alt="One Life Church photo 22" loading="lazy"></div>
+      <div class="swiper-slide"><img src="images/slide23.jpg" alt="One Life Church photo 23" loading="lazy"></div>
+    </div>
+
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper(".swiper", {
+    loop: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    spaceBetween: 20,
+    slidesPerView: 1,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+      dynamicBullets: true,
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 2,
+      },
+      1024: {
+        slidesPerView: 3,
+      },
+    },
+  });
+</script>
+
+</body>
+</html>
