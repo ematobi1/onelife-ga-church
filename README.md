@@ -23,7 +23,7 @@ onelifechurch-clone/
 ├── plan-a-visit.html           Plan a Visit (service times, map, directions)
 ├── sermons.html                 Livestream (watch live / past sermons)
 ├── get-involved.html           Ministries + volunteer signup form
-├── give.html                     Give (links to the real onrealm.org giving portal)
+├── give.html                     Give (in-person / contact; online portal removed)
 ├── connect.html                 Get Connected (ministries, groups, courses)
 ├── events.html                   Events (32nd Anniversary, tutoring services)
 ├── life-groups.html            Life Groups, with a day filter + signup form
@@ -97,7 +97,10 @@ to something readable. Two things worth knowing:
   Wednesdays 7:15 PM. Both are reproduced faithfully per source page; this
   wasn't reconciled since it's the church's own scheduling data to correct.
 - **The giving link** (`https://onrealm.org/OneLifeChurch/-/form/give/now`)
-  was taken verbatim from the live site's HTML, not guessed.
+  was taken verbatim from the live site's HTML, not guessed. It was removed
+  from `give.html` on 2026-10-23 because that Realm form offers crypto and
+  stock giving and no one on this project has Realm admin access to turn
+  those off. Restore it (or swap in another provider) once that's resolved.
 
 ## Design
 
