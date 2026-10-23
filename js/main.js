@@ -1,4 +1,4 @@
-(() => {
+﻿(() => {
   const header = document.querySelector(".site-header");
   const nav = document.querySelector(".nav");
   const navToggle = document.querySelector(".nav-toggle");
@@ -142,10 +142,10 @@
         const dow = date.getDay();
 
         if (dow === 0) events.push({ date, name: "Sunday LiveLife Gathering", time: "9:00 AM" });
-        if (dow === 6) events.push({ date, name: "Life-Class Bible Study", time: "10:00 AM – 12:00 PM" });
-        if (dow === 4) events.push({ date, name: "In-Person Tutoring Service", time: "4:30 – 6:30 PM" });
-        if (dow === 2 && isNthWeekdayOfMonth(date, 3)) events.push({ date, name: "Life-Line Night of Prayer", time: "7:00 – 9:00 PM" });
-        if (dow === 3 && isNthWeekdayOfMonth(date, 4)) events.push({ date, name: "Life-Pathways Empowerment", time: "7:00 – 9:00 PM" });
+        if (dow === 6) events.push({ date, name: "Life-Class Bible Study", time: "10:00 AM â€“ 12:00 PM" });
+        if (dow === 4) events.push({ date, name: "In-Person Tutoring Service", time: "4:30 â€“ 6:30 PM" });
+        if (dow === 2 && isNthWeekdayOfMonth(date, 3)) events.push({ date, name: "Life-Line Night of Prayer", time: "7:00 â€“ 9:00 PM" });
+        if (dow === 3 && isNthWeekdayOfMonth(date, 4)) events.push({ date, name: "Life-Pathways Empowerment", time: "7:00 â€“ 9:00 PM" });
       }
 
       return events.sort((a, b) => a.date - b.date);
@@ -159,7 +159,7 @@
       end.setDate(end.getDate() + 6);
       const rangeStart = new Date().toLocaleDateString("en-US", { month: "short", day: "numeric" });
       const rangeEnd = end.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-      rangeLabel.textContent = `${rangeStart} – ${rangeEnd}`;
+      rangeLabel.textContent = `${rangeStart} â€“ ${rangeEnd}`;
     }
 
     thisWeekList.innerHTML = events
@@ -196,71 +196,28 @@
     });
   }
 
-  const slider = document.querySelector("[data-slider]");
+  const marquee = document.querySelector("[data-marquee]");
 
-  if (slider) {
-    const slides = slider.querySelectorAll(".slider__slide");
-    const dots = slider.querySelectorAll(".slider__dot");
-    const status = slider.querySelector(".slider__status");
-    const pauseButton = slider.querySelector("[data-slider-pause]");
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let current = 0;
-    let timer = null;
-    let isPaused = prefersReducedMotion;
-
-    const goTo = (index) => {
-      current = (index + slides.length) % slides.length;
-      slides.forEach((slide, i) => {
-        const isActive = i === current;
-        slide.classList.toggle("is-active", isActive);
-        slide.setAttribute("aria-hidden", String(!isActive));
+  if (marquee) {
+    marquee.querySelectorAll(".marquee__track").forEach((track) => {
+      Array.from(track.children).forEach((card) => {
+        const copy = card.cloneNode(true);
+        copy.setAttribute("aria-hidden", "true");
+        track.appendChild(copy);
       });
-      dots.forEach((dot, i) => dot.setAttribute("aria-current", String(i === current)));
-      status.textContent = `Photo ${current + 1} of ${slides.length}`;
-    };
+    });
 
-    const stop = () => {
-      clearInterval(timer);
-      timer = null;
-    };
-
-    const start = () => {
-      if (isPaused || timer) return;
-      timer = setInterval(() => goTo(current + 1), 6000);
-    };
-
-    const updatePauseButton = () => {
+    const pauseButton = document.querySelector("[data-marquee-pause]");
+    const setPaused = (isPaused) => {
+      marquee.classList.toggle("is-paused", isPaused);
+      pauseButton.setAttribute("aria-pressed", String(isPaused));
       pauseButton.textContent = isPaused ? "Play" : "Pause";
-      pauseButton.setAttribute("aria-label", isPaused ? "Play slideshow" : "Pause slideshow");
     };
-
-    slider.querySelector("[data-slider-prev]").addEventListener("click", () => goTo(current - 1));
-    slider.querySelector("[data-slider-next]").addEventListener("click", () => goTo(current + 1));
-    dots.forEach((dot, i) => dot.addEventListener("click", () => goTo(i)));
 
     pauseButton.addEventListener("click", () => {
-      isPaused = !isPaused;
-      updatePauseButton();
-      if (isPaused) stop();
-      else start();
+      setPaused(!marquee.classList.contains("is-paused"));
     });
 
-    slider.addEventListener("keydown", (event) => {
-      if (event.key === "ArrowLeft") goTo(current - 1);
-      if (event.key === "ArrowRight") goTo(current + 1);
-    });
-
-    let touchStartX = 0;
-    slider.addEventListener("touchstart", (event) => {
-      touchStartX = event.touches[0].clientX;
-    }, { passive: true });
-    slider.addEventListener("touchend", (event) => {
-      const deltaX = event.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(deltaX) > 40) goTo(current + (deltaX < 0 ? 1 : -1));
-    });
-
-    goTo(0);
-    updatePauseButton();
-    start();
+    setPaused(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   }
 })();
