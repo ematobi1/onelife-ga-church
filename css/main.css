@@ -1217,3 +1217,116 @@ textarea:focus-visible {
   flex-direction: column;
   gap: var(--space-3);
 }
+
+.slider {
+  position: relative;
+  max-width: 960px;
+  margin-inline: auto;
+}
+
+.slider__viewport {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  background: var(--color-bg-dark);
+}
+
+.slider__track {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transition: transform 600ms ease;
+}
+
+.slider__slide {
+  flex: 0 0 100%;
+}
+
+.slider__slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.slider__arrow {
+  position: absolute;
+  top: calc(50% - 1.75rem);
+  transform: translateY(-50%);
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-primary);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: background var(--transition-fast);
+}
+
+.slider__arrow:hover {
+  background: var(--color-white);
+}
+
+.slider__arrow--prev {
+  left: var(--space-3);
+}
+
+.slider__arrow--next {
+  right: var(--space-3);
+}
+
+.slider__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.slider__dots {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.slider__dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-border);
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.slider__dot[aria-current="true"] {
+  background: var(--color-accent);
+  transform: scale(1.25);
+}
+
+.slider__pause {
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-ink-soft);
+  font: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.slider:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slider__track {
+    transition: none;
+  }
+}

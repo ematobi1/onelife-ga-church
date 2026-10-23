@@ -195,4 +195,75 @@
       });
     });
   }
+
+  const slider = document.querySelector("[data-slider]");
+
+  if (slider) {
+    const track = slider.querySelector(".slider__track");
+    const slides = slider.querySelectorAll(".slider__slide");
+    const dots = slider.querySelectorAll(".slider__dot");
+    const status = slider.querySelector(".slider__status");
+    const pauseButton = slider.querySelector("[data-slider-pause]");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let current = 0;
+    let timer = null;
+    let isPaused = prefersReducedMotion;
+
+    const goTo = (index) => {
+      current = (index + slides.length) % slides.length;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      slides.forEach((slide, i) => slide.setAttribute("aria-hidden", String(i !== current)));
+      dots.forEach((dot, i) => dot.setAttribute("aria-current", String(i === current)));
+      status.textContent = `Photo ${current + 1} of ${slides.length}`;
+    };
+
+    const stop = () => {
+      clearInterval(timer);
+      timer = null;
+    };
+
+    const start = () => {
+      if (isPaused || timer) return;
+      timer = setInterval(() => goTo(current + 1), 5000);
+    };
+
+    const updatePauseButton = () => {
+      pauseButton.textContent = isPaused ? "Play" : "Pause";
+      pauseButton.setAttribute("aria-label", isPaused ? "Play slideshow" : "Pause slideshow");
+    };
+
+    slider.querySelector("[data-slider-prev]").addEventListener("click", () => goTo(current - 1));
+    slider.querySelector("[data-slider-next]").addEventListener("click", () => goTo(current + 1));
+    dots.forEach((dot, i) => dot.addEventListener("click", () => goTo(i)));
+
+    pauseButton.addEventListener("click", () => {
+      isPaused = !isPaused;
+      updatePauseButton();
+      if (isPaused) stop();
+      else start();
+    });
+
+    slider.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") goTo(current - 1);
+      if (event.key === "ArrowRight") goTo(current + 1);
+    });
+
+    slider.addEventListener("mouseenter", stop);
+    slider.addEventListener("mouseleave", start);
+    slider.addEventListener("focusin", stop);
+    slider.addEventListener("focusout", start);
+
+    let touchStartX = 0;
+    slider.addEventListener("touchstart", (event) => {
+      touchStartX = event.touches[0].clientX;
+    }, { passive: true });
+    slider.addEventListener("touchend", (event) => {
+      const deltaX = event.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(deltaX) > 40) goTo(current + (deltaX < 0 ? 1 : -1));
+    });
+
+    goTo(0);
+    updatePauseButton();
+    start();
+  }
 })();
