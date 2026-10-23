@@ -209,13 +209,28 @@
     let timer = null;
     let isPaused = prefersReducedMotion;
 
+    const loopClone = slides[0].cloneNode(true);
+    loopClone.setAttribute("aria-hidden", "true");
+    loopClone.querySelector("img").alt = "";
+    track.appendChild(loopClone);
+
+    const moveTrack = (position, animate) => {
+      track.style.transition = animate ? "" : "none";
+      track.style.transform = `translateX(-${position * 100}%)`;
+    };
+
     const goTo = (index) => {
+      const wrapsForward = index === slides.length;
       current = (index + slides.length) % slides.length;
-      track.style.transform = `translateX(-${current * 100}%)`;
+      moveTrack(wrapsForward ? slides.length : current, !prefersReducedMotion);
       slides.forEach((slide, i) => slide.setAttribute("aria-hidden", String(i !== current)));
       dots.forEach((dot, i) => dot.setAttribute("aria-current", String(i === current)));
       status.textContent = `Photo ${current + 1} of ${slides.length}`;
     };
+
+    track.addEventListener("transitionend", () => {
+      if (current === 0) moveTrack(0, false);
+    });
 
     const stop = () => {
       clearInterval(timer);
@@ -224,7 +239,7 @@
 
     const start = () => {
       if (isPaused || timer) return;
-      timer = setInterval(() => goTo(current + 1), 5000);
+      timer = setInterval(() => goTo(current + 1), 4000);
     };
 
     const updatePauseButton = () => {
@@ -247,11 +262,6 @@
       if (event.key === "ArrowLeft") goTo(current - 1);
       if (event.key === "ArrowRight") goTo(current + 1);
     });
-
-    slider.addEventListener("mouseenter", stop);
-    slider.addEventListener("mouseleave", start);
-    slider.addEventListener("focusin", stop);
-    slider.addEventListener("focusout", start);
 
     let touchStartX = 0;
     slider.addEventListener("touchstart", (event) => {
