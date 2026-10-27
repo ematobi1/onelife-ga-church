@@ -63,3 +63,10 @@ test("no double-encoded UTF-8 in source files", () => {
   const files = [...pages, "js/main.js", "js/pwa.js", "css/main.css", "sw.js"];
   for (const file of files) assert.doesNotMatch(read(file), /â€|Ã©/, `${file} contains mojibake`);
 });
+
+test("netlify.toml blocks non-site files from being served", () => {
+  const toml = read("netlify.toml");
+  for (const path of ["/services/*", "/scripts/*", "/tests/*", "/package.json", "/package-lock.json", "/netlify.toml", "/README.md"]) {
+    assert.ok(toml.includes(`from = "${path}"\nto = "/404"\nstatus = 404\nforce = true`), `${path} is not blocked`);
+  }
+});
