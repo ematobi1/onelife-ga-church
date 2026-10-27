@@ -142,10 +142,10 @@
         const dow = date.getDay();
 
         if (dow === 0) events.push({ date, name: "Sunday LiveLife Gathering", time: "9:00 AM" });
-        if (dow === 6) events.push({ date, name: "Life-Class Bible Study", time: "10:00 AM â€“ 12:00 PM" });
-        if (dow === 4) events.push({ date, name: "In-Person Tutoring Service", time: "4:30 â€“ 6:30 PM" });
-        if (dow === 2 && isNthWeekdayOfMonth(date, 3)) events.push({ date, name: "Life-Line Night of Prayer", time: "7:00 â€“ 9:00 PM" });
-        if (dow === 3 && isNthWeekdayOfMonth(date, 4)) events.push({ date, name: "Life-Pathways Empowerment", time: "7:00 â€“ 9:00 PM" });
+        if (dow === 6) events.push({ date, name: "Life-Class Bible Study", time: "10:00 AM – 12:00 PM" });
+        if (dow === 4) events.push({ date, name: "In-Person Tutoring Service", time: "4:30 – 6:30 PM" });
+        if (dow === 2 && isNthWeekdayOfMonth(date, 3)) events.push({ date, name: "Life-Line Night of Prayer", time: "7:00 – 9:00 PM" });
+        if (dow === 3 && isNthWeekdayOfMonth(date, 4)) events.push({ date, name: "Life-Pathways Empowerment", time: "7:00 – 9:00 PM" });
       }
 
       return events.sort((a, b) => a.date - b.date);
@@ -159,7 +159,7 @@
       end.setDate(end.getDate() + 6);
       const rangeStart = new Date().toLocaleDateString("en-US", { month: "short", day: "numeric" });
       const rangeEnd = end.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-      rangeLabel.textContent = `${rangeStart} â€“ ${rangeEnd}`;
+      rangeLabel.textContent = `${rangeStart} – ${rangeEnd}`;
     }
 
     thisWeekList.innerHTML = events
