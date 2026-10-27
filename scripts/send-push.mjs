@@ -18,6 +18,12 @@ const response = await fetch(`${SITE_URL}/api/v1/notifications`, {
   signal: AbortSignal.timeout(30000)
 });
 
+const isJson = (response.headers.get("content-type") || "").includes("application/json");
+if (!isJson) {
+  console.error(`Failed (${response.status}): ${SITE_URL} did not answer from the push service. Is it deployed?`);
+  process.exit(1);
+}
+
 const result = await response.json();
 if (!response.ok) {
   console.error(`Failed (${response.status}):`, JSON.stringify(result.error));
