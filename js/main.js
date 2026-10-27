@@ -23,7 +23,7 @@
     if (event.key === "Escape") closeMobileNav();
   });
 
-  const isDesktop = () => window.matchMedia("(min-width: 960px)").matches;
+  const isDesktop = () => window.matchMedia("(min-width: 1200px)").matches;
 
   document.querySelectorAll(".nav__item--dropdown > .nav__link").forEach((trigger) => {
     trigger.addEventListener("click", (event) => {
