@@ -1,0 +1,23 @@
+{
+  "name": "One Life Church",
+  "short_name": "One Life",
+  "description": "Watch live, see what's happening this week, give, and share prayer requests with One Life Church in Lawrenceville, Georgia.",
+  "id": "/",
+  "start_url": "/index.html?source=app",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#28282e",
+  "icons": [
+    { "src": "/images/app/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/images/app/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/images/app/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Watch Live", "url": "/sermons.html?source=app", "icons": [{ "src": "/images/app/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Events", "url": "/events.html?source=app", "icons": [{ "src": "/images/app/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Prayer Wall", "url": "/prayer-wall.html?source=app", "icons": [{ "src": "/images/app/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Give", "url": "/give.html?source=app", "icons": [{ "src": "/images/app/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

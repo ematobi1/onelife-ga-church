@@ -148,3 +148,21 @@ Already linked to the `onelife-church-ga` Netlify site.
       `blog.html` use original copy written for this project — review and
       adjust the voice/specifics as needed since they weren't reviewed by
       the church before publishing.
+
+## Mobile app (PWA)
+
+The site installs as an app from the browser ("Install the App" on `more.html`,
+or Share → Add to Home Screen on iPhone).
+
+- `manifest.webmanifest` + `images/app/` icons: name, icon, standalone display, home-screen shortcuts.
+- `sw.js`: offline support. Pages are network-first with cached fallback and `offline.html`; assets are stale-while-revalidate. Bump `CACHE_VERSION` when changing the precache list.
+- `js/pwa.js`: bottom tab bar (Home, Watch, Events, Give, More) below 1200px, install prompt, notification toggle.
+- `more.html`: every page grouped under About, Visit, Grow, Connect, Care, Family.
+- `services/push/`: notification backend. See its README.
+
+iPhone notifications need iOS 16.4+ and the app installed to the Home Screen first.
+
+## Tests
+
+`npm test` runs the gate suite (site wiring + push service). A pre-commit hook in
+`.githooks/` runs it; enable it in a fresh clone with `git config core.hooksPath .githooks`.
